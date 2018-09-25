@@ -44,7 +44,7 @@ int main()
 	v1 == v2;
 
 	cout << endl << "**** Calculating the distance between v1 and v2 ****" << endl;
-	v3.distance_to(v1, v2);
+	v3.distance_to(v1);
 	cout << endl << "Distance: " << v3.x << ", " << v3.y << ", " << v3.z << endl << endl;
 
 	cout << endl << "**** Normalizing vectors ****" << endl << "- Vector 1:" << endl;
@@ -59,13 +59,7 @@ int main()
 	cout << endl << "- Vector 2: ";
 	v2.zero();
 
-	cout << endl << "**** Checking if all components are 0 ****" << endl << "- Vector 1: ";
-	v1.is_zero();
-	cout << endl << "- Vector 2: ";
-	v2.is_zero();
-
 	cout << endl;
-
 
 	system("pause");
 	return 0;

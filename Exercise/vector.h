@@ -14,42 +14,28 @@ public:
 public:
 	Vec3()
 	{
-		x = 0.0;
-		y = 0.0;
-		z = 0.0;
+		x = 0.0f;
+		y = 0.0f;
+		z = 0.0f;
 	}
-	Vec3(Type _x, Type _y, Type _z)
-	{
-		this->x = _x;
-		this->y = _y;
-		this->z = _z;
-	}
-	Vec3(Vec3 &vec)
-	{
-		this->x = vec.x;
-		this->y = vec.y;
-		this->z = vec.z;
-	}
+	Vec3(const Type &x, const Type &y, const Type &z):x(x),y(y),z(z)
+	{}
+
+	Vec3(const Vec3 &vec):x(vec.x), y(vec.y), z(vec.z)
+	{}
+
 	~Vec3() {}
-	Vec3 operator+(Vec3 v1)
-	{
-		Vec3 op;
-		op.x = x + v1.x;
-		op.y = y + v1.y;
-		op.z = z + v1.z;
 
-		return op;
-	}
-	Vec3 operator-(Vec3 v1)
+	Vec3 operator+(Vec3 &v1) const
 	{
-		Vec3 op;
-		op.x = x - v1.x;
-		op.y = y - v1.y;
-		op.z = z - v1.z;
-
-		return op;
+		return Vec3(x + v1.x, y + v1.y, z + v1.z);
 	}
-	Vec3 operator+=(Vec3 v1)
+	Vec3 operator-(Vec3 v1) const
+	{
+		return Vec3 (x - v1.x, y - v1.y, z - v1.z);
+	}
+
+	Vec3 operator+=(Vec3 &v1)
 	{
 		x += v1.x;
 		y += v1.y;
@@ -65,7 +51,7 @@ public:
 
 		return v1;
 	}
-	Vec3 operator=(Vec3 v1)
+	Vec3 operator=(Vec3 &v1)
 	{
 		x = v1.x;
 		y = v1.y;
@@ -75,23 +61,14 @@ public:
 	}
 	bool operator==(Vec3 v1)
 	{
-		if (x == v1.x && y == v1.y && z == v1.z)
-		{
-			cout << "They are the same vector" << endl;
-			return true;
-		}
-		else
-		{
-			cout << "They are not the same vector" << endl;
-			return false;
-		}
+		return (x == v1.x && y == v1.y && z == v1.z);
 	}
 	void normalize()
 	{
-		float res;
+		Type res;
 		Vec3 vec1;
 
-		res = sqrt(pow(x, 2) + pow(y, 2) + pow(z, 2));
+		res = sqrt((x*x) + y*y + z*z);
 
 		vec1.x = x / res;
 		vec1.y = y / res;
@@ -103,36 +80,20 @@ public:
 	{
 		Vec3 v;
 
-		v.x = 0;
-		v.y = 0;
-		v.z = 0;
+		v.x = 0.0f;
+		v.y = 0.0f;
+		v.z = 0.0f;
 
 		cout << v.x << ", " << v.y << ", " << v.z << endl;
 	}
-	bool is_zero()
+	bool is_zero() const
 	{
-		Vec3 v;
-		if (v.x == 0 && v.y == 0 && v.z == 0)
-		{
-			cout << "All components are 0" << endl;
-			return true;
-		}
-
-		else
-		{
-			cout << "All components are not 0" << endl;
-			return false;
-		}
+		return (x == 0.0f && y == 0.0f && z == 0.0f);
 	}
-	Vec3 distance_to(Vec3 v1, Vec3 v2)
+
+	Type distance_to(Vec3 &v1) const
 	{
-		Vec3 v3;
-
-		v3.x = v2.x - v1.x;
-		v3.y = v2.y - v1.y;
-		v3.z = v2.z - v1.z;
-
-		return v3;
+		return sqrt(((x - v1.x) * (x - v1.x)) + ((y - v1.y) * (y - v1.y)) + ((z - v1.z) * (z - v1.z)));
 	}
 };
 
